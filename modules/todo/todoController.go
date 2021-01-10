@@ -19,12 +19,12 @@ type ITodoController interface {
 }
 
 type todoController struct {
-	service ITodoService
+	useCase ITodoUseCase
 }
 
 // NewTodoController -> creates todo controller
-func NewTodoController(service ITodoService) ITodoController {
-	return &todoController{service: service}
+func NewTodoController(useCase ITodoUseCase) ITodoController {
+	return &todoController{useCase: useCase}
 }
 
 // CreateTodo is responsible for create todo
@@ -36,7 +36,7 @@ func (c *todoController) Create(ctx *fiber.Ctx) error {
 	}
 
 	user := utils.GetUser(ctx)
-	todo, err := c.service.Create(b, user)
+	todo, err := c.useCase.Create(b, user)
 
 	if err != nil {
 		return fiber.NewError(fiber.StatusConflict, err.Error())
@@ -56,7 +56,7 @@ func (c *todoController) GetAll(ctx *fiber.Ctx) error {
 	res := []TodoResponse{}
 	user := utils.GetUser(ctx)
 
-	todos, err := c.service.FindByUser(user)
+	todos, err := c.useCase.FindByUser(user)
 
 	for _, todo := range todos {
 		todoRes := TodoResponse{
@@ -87,7 +87,7 @@ func (c *todoController) Get(ctx *fiber.Ctx) error {
 
 	user := utils.GetUser(ctx)
 
-	todo, err := c.service.FindOne(user, todoID)
+	todo, err := c.useCase.FindOne(user, todoID)
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		return ctx.JSON(&TodoCreateResponse{})
 	}
@@ -113,7 +113,7 @@ func (c *todoController) Delete(ctx *fiber.Ctx) error {
 
 	user := utils.GetUser(ctx)
 
-	err := c.service.Delete(user, todoID)
+	err := c.useCase.Delete(user, todoID)
 
 	if err != nil {
 		return fiber.NewError(fiber.StatusConflict, err.Error())
@@ -139,7 +139,7 @@ func (c *todoController) Check(ctx *fiber.Ctx) error {
 
 	user := utils.GetUser(ctx)
 
-	err := c.service.Update(user, todoID, map[string]interface{}{"completed": b.Completed})
+	err := c.useCase.Update(user, todoID, map[string]interface{}{"completed": b.Completed})
 
 	if err != nil {
 		return fiber.NewError(fiber.StatusConflict, err.Error())
@@ -165,7 +165,7 @@ func (c *todoController) Update(ctx *fiber.Ctx) error {
 
 	user := utils.GetUser(ctx)
 
-	err := c.service.Update(user, todoID, &Todo{Task: b.Task})
+	err := c.useCase.Update(user, todoID, &Todo{Task: b.Task})
 	if err != nil {
 		return fiber.NewError(fiber.StatusConflict, err.Error())
 	}

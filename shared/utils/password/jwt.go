@@ -1,4 +1,4 @@
-package jwt
+package password
 
 import (
 	"errors"
@@ -9,13 +9,26 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
+// IJwt -> jwt struct interface
+type IJwt interface {
+	Generate(payload *TokenPayload) string
+	Verify(token string) (*TokenPayload, error)
+}
+
+type jwtImpl struct{}
+
+// NewJwt -> JWT factory
+func NewJwt() IJwt {
+	return &jwtImpl{}
+}
+
 // TokenPayload defines the payload for the token
 type TokenPayload struct {
 	ID uint
 }
 
 // Generate generates the jwt token based on payload
-func Generate(payload *TokenPayload) string {
+func (j *jwtImpl) Generate(payload *TokenPayload) string {
 	v, err := time.ParseDuration(config.TOKENEXP)
 
 	if err != nil {
@@ -53,7 +66,7 @@ func parse(token string) (*jwt.Token, error) {
 }
 
 // Verify verifies the jwt token against the secret
-func Verify(token string) (*TokenPayload, error) {
+func (j *jwtImpl) Verify(token string) (*TokenPayload, error) {
 	parsed, err := parse(token)
 
 	if err != nil {

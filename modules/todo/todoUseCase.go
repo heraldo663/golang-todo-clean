@@ -6,7 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type ITodoService interface {
+type ITodoUseCase interface {
 	Create(c *CreateDTO, user *uint) (*Todo, error)
 	FindByUser(user *uint) ([]*Todo, error)
 	FindOne(user *uint, todoID string) (*Todo, error)
@@ -15,16 +15,16 @@ type ITodoService interface {
 	// Check()
 }
 
-type todoService struct {
+type todoUseCase struct {
 	repository ITodoRepository
 }
 
-// NewTodoService -> Creates a new todo service
-func NewTodoService(r ITodoRepository) ITodoService {
-	return &todoService{repository: r}
+// NewTodoUseCase -> Creates a new todo UseCase
+func NewTodoUseCase(r ITodoRepository) ITodoUseCase {
+	return &todoUseCase{repository: r}
 }
 
-func (s *todoService) Create(c *CreateDTO, user *uint) (*Todo, error) {
+func (s *todoUseCase) Create(c *CreateDTO, user *uint) (*Todo, error) {
 	d := &Todo{
 		Task: c.Task,
 		User: user,
@@ -39,7 +39,7 @@ func (s *todoService) Create(c *CreateDTO, user *uint) (*Todo, error) {
 	return todo, nil
 }
 
-func (s *todoService) FindByUser(user *uint) ([]*Todo, error) {
+func (s *todoUseCase) FindByUser(user *uint) ([]*Todo, error) {
 	todos, err := s.repository.FindTodosByUser(user)
 
 	if err != nil {
@@ -49,7 +49,7 @@ func (s *todoService) FindByUser(user *uint) ([]*Todo, error) {
 	return todos, nil
 }
 
-func (s *todoService) FindOne(user *uint, todoID string) (*Todo, error) {
+func (s *todoUseCase) FindOne(user *uint, todoID string) (*Todo, error) {
 	todo, err := s.repository.FindTodoByUser(user, todoID)
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 
@@ -59,10 +59,10 @@ func (s *todoService) FindOne(user *uint, todoID string) (*Todo, error) {
 
 }
 
-func (s *todoService) Delete(user *uint, todoID string) error {
+func (s *todoUseCase) Delete(user *uint, todoID string) error {
 	return s.repository.DeleteTodo(user, todoID)
 }
 
-func (s *todoService) Update(user *uint, todoID string, data interface{}) error {
+func (s *todoUseCase) Update(user *uint, todoID string, data interface{}) error {
 	return s.repository.UpdateTodo(todoID, user, data)
 }

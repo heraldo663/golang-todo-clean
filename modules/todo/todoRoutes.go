@@ -9,8 +9,8 @@ import (
 
 var (
 	repository ITodoRepository = NewTodoRepository(database.DB)
-	service    ITodoService    = NewTodoService(repository)
-	controller ITodoController = NewTodoController(service)
+	useCase    ITodoUseCase    = NewTodoUseCase(repository)
+	controller ITodoController = NewTodoController(useCase)
 )
 
 // TodoRoutes contains all routes relative to /todo

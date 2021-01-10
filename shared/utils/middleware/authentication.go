@@ -1,10 +1,14 @@
 package middleware
 
 import (
-	"numtostr/gotodo/shared/utils/jwt"
+	"numtostr/gotodo/shared/utils/password"
 	"strings"
 
 	"github.com/gofiber/fiber/v2"
+)
+
+var (
+	jwtImpl password.IJwt = password.NewJwt()
 )
 
 // Auth is the authentication middleware
@@ -25,7 +29,7 @@ func Auth(c *fiber.Ctx) error {
 	}
 
 	// Verify the token which is in the chunks
-	user, err := jwt.Verify(chunks[1])
+	user, err := jwtImpl.Verify(chunks[1])
 
 	if err != nil {
 		return fiber.ErrUnauthorized

@@ -2,8 +2,19 @@ package password
 
 import "golang.org/x/crypto/bcrypt"
 
+type IBcrypt interface {
+	Generate(raw string) string
+	Verify(hash string, raw string) error
+}
+
+type bycriptImpl struct{}
+
+func NewBcrypt() IBcrypt {
+	return &bycriptImpl{}
+}
+
 // Generate return a hashed password
-func Generate(raw string) string {
+func (b *bycriptImpl) Generate(raw string) string {
 	hash, err := bcrypt.GenerateFromPassword([]byte(raw), 10)
 
 	if err != nil {
@@ -14,6 +25,6 @@ func Generate(raw string) string {
 }
 
 // Verify compares a hashed password with plaintext password
-func Verify(hash string, raw string) error {
+func (b *bycriptImpl) Verify(hash string, raw string) error {
 	return bcrypt.CompareHashAndPassword([]byte(hash), []byte(raw))
 }
