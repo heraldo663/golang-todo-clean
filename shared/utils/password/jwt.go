@@ -3,7 +3,7 @@ package password
 import (
 	"errors"
 	"fmt"
-	"numtostr/gotodo/config"
+	"heraldo663/todo/config"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"

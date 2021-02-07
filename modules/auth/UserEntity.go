@@ -2,7 +2,7 @@
 package auth
 
 import (
-	"numtostr/gotodo/modules/todo"
+	"heraldo663/todo/modules/todo"
 
 	"gorm.io/gorm"
 )

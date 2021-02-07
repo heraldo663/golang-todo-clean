@@ -1,7 +1,7 @@
 package auth
 
 import (
-	"numtostr/gotodo/shared/utils"
+	"heraldo663/todo/shared/utils"
 
 	"github.com/gofiber/fiber/v2"
 )

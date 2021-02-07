@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
+	"heraldo663/todo/config"
+	"heraldo663/todo/config/database"
+	"heraldo663/todo/modules/auth"
+	"heraldo663/todo/modules/todo"
+	"heraldo663/todo/shared/utils"
 	"log"
-	"numtostr/gotodo/config"
-	"numtostr/gotodo/config/database"
-	"numtostr/gotodo/modules/auth"
-	"numtostr/gotodo/modules/todo"
-	"numtostr/gotodo/shared/utils"
 	"os"
 	"os/signal"
 	"syscall"

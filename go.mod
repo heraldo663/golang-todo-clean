@@ -1,4 +1,4 @@
-module numtostr/gotodo
+module heraldo663/todo
 
 go 1.14
 

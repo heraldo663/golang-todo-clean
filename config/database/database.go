@@ -2,7 +2,7 @@ package database
 
 import (
 	"fmt"
-	"numtostr/gotodo/config"
+	"heraldo663/todo/config"
 	"time"
 
 	"gorm.io/driver/sqlite"

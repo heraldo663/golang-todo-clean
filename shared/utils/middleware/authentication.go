@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"numtostr/gotodo/shared/utils/password"
+	"heraldo663/todo/shared/utils/password"
 	"strings"
 
 	"github.com/gofiber/fiber/v2"

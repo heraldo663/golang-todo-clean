@@ -2,8 +2,8 @@ package todo
 
 import (
 	"errors"
-	"numtostr/gotodo/shared/types"
-	"numtostr/gotodo/shared/utils"
+	"heraldo663/todo/shared/types"
+	"heraldo663/todo/shared/utils"
 
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/gorm"

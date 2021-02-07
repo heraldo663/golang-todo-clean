@@ -1,8 +1,8 @@
 package auth
 
 import (
-	"numtostr/gotodo/config/database"
-	"numtostr/gotodo/shared/utils/password"
+	"heraldo663/todo/config/database"
+	"heraldo663/todo/shared/utils/password"
 
 	"github.com/gofiber/fiber/v2"
 )

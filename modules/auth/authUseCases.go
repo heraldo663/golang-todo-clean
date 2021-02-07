@@ -1,7 +1,7 @@
 package auth
 
 import (
-	"numtostr/gotodo/shared/utils/password"
+	"heraldo663/todo/shared/utils/password"
 )
 
 type IAuthUseCase interface {

@@ -1,9 +1,9 @@
 # Prerequisite
 
 1. Make sure you have the following installed outside the current project directory and available in your `GOPATH`
-    - golang
-    - [air](https://github.com/cosmtrek/air) for hot reloading
-    - [godotenv](https://github.com/joho/godotenv) for loading `.env` file
+   - golang
+   - [air](https://github.com/cosmtrek/air) for hot reloading
+   - [godotenv](https://github.com/joho/godotenv) for loading `.env` file
 
 # Installation
 
@@ -33,3 +33,13 @@ TOKENKEY=
 # default: 10h
 TOKENEXP=
 ```
+
+## Todo
+
+- [] Unit tests
+- [] Api tests
+- [] better cmd for start app
+- [] better entities (actual is anemic)
+- [] Entities actually depends on gorm
+- [] change gorm to pure sql
+- [] add migrations

@@ -1,8 +1,8 @@
 package todo
 
 import (
-	"numtostr/gotodo/config/database"
-	"numtostr/gotodo/shared/utils/middleware"
+	"heraldo663/todo/config/database"
+	"heraldo663/todo/shared/utils/middleware"
 
 	"github.com/gofiber/fiber/v2"
 )
